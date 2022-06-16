@@ -201,14 +201,14 @@ async def check_login_status_send_email(request: Request, background_tasks: Back
         status = check_login(user)
         if status == False:
             email = get_user_email(user)
-            # await send_email_background(
-            #     background_tasks=background_tasks,
-            #     body="",
-            #     email_to=email,
-            #     subject="You havent logged in yet",
-            #     template_body={"name": "User", "email": email},
-            #     template_name="test"
-            # )
+            await send_email_background(
+                background_tasks=background_tasks,
+                body="",
+                email_to=email,
+                subject="You havent logged in yet",
+                template_body={"name": "User", "email": email},
+                template_name="test"
+            )
     return JSONResponse(status_code=200, content={"success": True, "message": data})
 
 
@@ -216,12 +216,19 @@ async def check_login_status_send_email(request: Request, background_tasks: Back
 async def check_cv_score_send_email(request: Request, background_tasks: BackgroundTasks) -> JSONResponse:
     all_users = await get_all_users('ifp-b2c-prod')
 
-    def check_cv_score_send_email(all_users):
+    async def check_cv_score_send_email(all_users):
         for user in all_users:
             email = get_user_email(user)
             cv_score = calculate_cv_score(user)
             if cv_score >= 0 or cv_score <= 40:
-                # send the email
+                # await send_email_background(
+                #     background_tasks=background_tasks,
+                #     body="",
+                #     email_to=email,
+                #     subject="Your CV score is low",
+                #     template_body={"name": "User", "email": email},
+                #     template_name="test"
+                # )
                 print(email, cv_score, "greater than 0 or less than 40")
             elif cv_score >= 41 and cv_score < 70:
                 # send email
@@ -234,6 +241,17 @@ async def check_cv_score_send_email(request: Request, background_tasks: Backgrou
     return JSONResponse(status_code=200, content={"success": True, "message": all_users})
 
 
+@app.post('/test')
+async def test(request: Request, background_tasks: BackgroundTasks) -> JSONResponse:
+    await send_email_background(
+        subject="Subscription expired",
+        email_to="vatsal@fineprint.legal",
+        template_name="freeTrialEndingInNdays",
+        template_body={"name": "Vatsal", "daysLeft": "5",
+                       "endDate": "2020-01-01", "nextDate": "2020-01-06"},
+        background_tasks=background_tasks
+    )
+    return JSONResponse(status_code=200, content={"success": True, "message": "email has been sent in background"})
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", port=8000, reload=True)

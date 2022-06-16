@@ -1,3 +1,5 @@
+import email
+from unittest import async_case
 from utils import *
 import json
 from fastapi import FastAPI, BackgroundTasks, Request, File, UploadFile, Form, Query, Path, Body
@@ -187,3 +189,51 @@ async def send_invite_email(request: Request, background_tasks: BackgroundTasks)
             return JSONResponse(status_code=500, content={"success": False, "message": "Internal Server Error"})
     else:
         return JSONResponse(status_code=403, content={'message': 'Oops! You are not allowed to access this server.'})
+
+
+# change name of function (first type of users)
+@app.post('/check_login_status_send_email')
+async def check_login_status_send_email(request: Request, background_tasks: BackgroundTasks) -> JSONResponse:
+    paid_users = get_paid_users(
+        database='ifp-b2c-prod', collection='subscription')
+    data = []
+    for user in paid_users:
+        status = check_login(user)
+        if status == False:
+            email = get_user_email(user)
+            # await send_email_background(
+            #     background_tasks=background_tasks,
+            #     body="",
+            #     email_to=email,
+            #     subject="You havent logged in yet",
+            #     template_body={"name": "User", "email": email},
+            #     template_name="test"
+            # )
+    return JSONResponse(status_code=200, content={"success": True, "message": data})
+
+
+@app.post('/check_cv_score_send_email')
+async def check_cv_score_send_email(request: Request, background_tasks: BackgroundTasks) -> JSONResponse:
+    all_users = await get_all_users('ifp-b2c-prod')
+
+    def check_cv_score_send_email(all_users):
+        for user in all_users:
+            email = get_user_email(user)
+            cv_score = calculate_cv_score(user)
+            if cv_score >= 0 or cv_score <= 40:
+                # send the email
+                print(email, cv_score, "greater than 0 or less than 40")
+            elif cv_score >= 41 and cv_score < 70:
+                # send email
+                print(email, cv_score, "greater than 41 and less than 70")
+            elif cv_score >= 70:
+                # send email
+                print(email, cv_score, "greater than 70")
+    background_tasks.add_task(check_cv_score_send_email, all_users)
+
+    return JSONResponse(status_code=200, content={"success": True, "message": all_users})
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", port=8000, reload=True)

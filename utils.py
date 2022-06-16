@@ -134,13 +134,15 @@ def get_username(user_id):
     student_collection = get_collection(database, "student")
     student_data = student_collection.find_one(
         {"userId": ObjectId(user_id)})
-    user_name = student_data.get(
-        "firstName")+" "+student_data.get("lastName")
+    first_name = str(student_data.get('firstName'))
+    last_name = str(student_data.get('lastName'))
+    user_name = first_name+" "+last_name
     return user_name
 # ----------------------------------------------------------------
 
 
 def calculate_cv_score(user_id):
+    logger.info("Calculating cv score for user {}".format(user_id))
     net_score = 0
     student = get_collection(
         "ifp-b2c-prod", "student").find_one({"userId": ObjectId(user_id)})
@@ -168,7 +170,6 @@ def calculate_cv_score(user_id):
         net_score += min(skill*5, 10)
         net_score += min(award*5, 10)
         net_score += min(certification*5, 10)
-        logger.info("CV score for {} is {}".format(user_id, net_score))
         return net_score
     else:
         return net_score
@@ -200,15 +201,36 @@ def get_razorpay_users():
     print(cash_users)
     return cash_users
 
+# ------------------------------------------------------------------------------------------------
+
+
+async def get_all_users(database):
+    """get all users"""
+    users_collection = get_collection(database, 'users').find({})
+    all_users = [str(user.get('_id'))
+                 for user in users_collection]
+
+    return all_users
+
 # ----------------------------------------------------------------------------------------
 
 
-def get_paid_users():
-    subscriptions = get_collection('ifp-b2c-prod', 'subscription').find({})
+def get_paid_users(database, collection):
+    subscriptions = get_collection(database, collection).find({})
     paid_users = [str(subscription.get('userId'))
                   for subscription in subscriptions]
     print(paid_users)
     return paid_users
+
+
+# ----------------------------------------------------------------------------------------
+def get_user_email(user_id):
+    user = get_collection(
+        'ifp-b2c-prod', 'users').find_one({'_id': ObjectId(user_id)})
+    if user is not None:
+        return user.get('email')
+    return None
+
 
 # ------------------------------------------------------------------------------------------------
 

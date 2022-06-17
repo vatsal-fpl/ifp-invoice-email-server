@@ -382,6 +382,51 @@ async def create_invoice_document(document_context, background_tasks: Background
         logger.info(f"Invoice sent to {document_context.get('billEmail')}")
 
 
+# ------------------------------------------------------------------------------------------------------------
+async def create_invoice_document2(document_context, background_tasks: BackgroundTasks):
+    invoice_template_path = BASE_DIR+"/invoice_template/invoice.docx"
+    doc = DocxTemplate(invoice_template_path)
+    doc.render(document_context)
+    invoice_path = BASE_DIR+"/invoices/"
+    invoice_no = document_context.get("paymentId")
+    if not os.path.exists(invoice_path):
+        os.makedirs(invoice_path)
+    docx_path = BASE_DIR + f"/generated_documents/"+str(invoice_no)+".docx"
+    doc.save(docx_path)
+    subprocess.check_output([libreoffice_path, '--headless', '--invisible', '--convert-to',
+                            'pdf', f"generated_documents/{invoice_no}.docx", '--outdir', f"{BASE_DIR}/invoices/"])
+    # try:
+    #     subprocess.run(
+    #         ["doc2pdf", docx_path])
+    #     subprocess.run(
+    #         ["mv", f"generated_documents/"+f"{invoice_no}"+'.pdf', f"{BASE_DIR}/invoices/{folder_name}/"])
+    # except:
+    #     print('Error converting docx to pdf!')
+
+    userId = document_context.get("userId")
+    user_name = get_username(userId)
+    send_email_flag = document_context.get("send_email_flag")
+    pdf_path = f"{BASE_DIR}/invoices/{invoice_no}"+".pdf"
+    print("------pdf path", pdf_path)
+
+    if send_email_flag == False:
+        background_tasks.add_task(delete_file, docx_path)
+    else:
+        print("send_email_flag is true")
+        await send_mail_with_attachment_background(
+            subject="Congratulations! Your payment is successful",
+            email_to=document_context.get("billEmail"),
+            path=pdf_path,
+            template_name="newSubscriptionActived",
+            template_body={
+                "name": user_name,
+            },
+            background_tasks=background_tasks
+        )
+        background_tasks.add_task(delete_file, docx_path)
+        logger.info(f"Invoice sent to {document_context.get('billEmail')}")
+
+
 # ---------------------- Check Subscription Status for free users
 async def check_subscription_send_email_free(background_tasks: BackgroundTasks):
     database = 'ifp-b2c-prod'

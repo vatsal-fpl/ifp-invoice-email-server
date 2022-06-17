@@ -125,7 +125,7 @@ async def create_send_invoice_with_docx(invoice: Invoice, request: Request, back
         try:
             invoice_dict = invoice.dict()
             document_context = get_invoice_context(invoice_dict)
-            await create_invoice_document(document_context, background_tasks)
+            await create_invoice_document2(document_context, background_tasks)
             return JSONResponse(status_code=200, content={"success": True, "message": "invoice has been created"})
         except Exception as e:
             logger.error(e)

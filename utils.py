@@ -310,7 +310,7 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
             nextDate = endDate + datetime.timedelta(days=1)
             if n_day == 1:
                 template_name = "oneDayRemainingPaid"
-            if n_day == 4:
+            if n_day == 5:
                 if user_plan == "basic":
                     template_name = "fiveDaysRemainingBasic"
                 elif user_plan == "essential":

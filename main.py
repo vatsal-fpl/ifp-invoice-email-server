@@ -54,20 +54,20 @@ async def root(request: Request):
 
 @app.post("/send_email")
 async def send_email(request: Request, background_tasks: BackgroundTasks):
-    key = request.headers.get('email-server-key')
-    if key == os.environ.get('EMAIL_SERVER_KEY'):
-        data = await request.json()
-        await send_email_background(
-            background_tasks=background_tasks,
-            body=data.get('body'),
-            email_to=data.get('email_to'),
-            subject=data.get('subject'),
-            template_body=data.get('template_body'),
-            template_name=data.get('template_name'),
-        )
-        return JSONResponse(status_code=200, content={"message": "Email sent"})
-    else:
-        return JSONResponse(status_code=401, content={"message": "Unauthorized"})
+    # key = request.headers.get('email-server-key')
+    # if key == os.environ.get('EMAIL_SERVER_KEY'):
+    data = await request.json()
+    await send_email_background(
+        background_tasks=background_tasks,
+        body=data.get('body'),
+        email_to=data.get('email_to'),
+        subject=data.get('subject'),
+        template_body=data.get('template_body'),
+        template_name=data.get('template_name'),
+    )
+    return JSONResponse(status_code=200, content={"message": "Email sent"})
+    # else:
+    #     return JSONResponse(status_code=401, content={"message": "Unauthorized"})
 
 
 @app.post("/send_mail_with_attachment")

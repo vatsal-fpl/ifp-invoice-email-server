@@ -294,7 +294,7 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
     if endDate < date_now:
         print("Subscription expired")
         # change template for subscription expired
-        template_name = "test"
+        template_name = "subscriptionExpired"
         await send_email_background(
             background_tasks=background_tasks,
             subject="Subscription expired",
@@ -490,3 +490,11 @@ async def check_subscription_send_email_paid(background_tasks: BackgroundTasks):
             endDate = user_subscription[0].get("endDate")
             print(endDate)
             await check_subscription_paid(endDate, [1, 5, 7], user_email=user_email, user_plan=user_plan, user_name=user_name, background_tasks=background_tasks)
+
+
+# ---------------------- get all email templates list ----------------------
+def get_all_email_templates_names(path):
+    file_list = os.listdir(path)
+    file_list = [file for file in file_list if not file.startswith('.')]
+    print(file_list)
+# -----------------------------------------

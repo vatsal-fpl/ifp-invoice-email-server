@@ -206,8 +206,8 @@ async def check_login_status_send_email(request: Request, background_tasks: Back
                 body="",
                 email_to=email,
                 subject="You havent logged in yet",
-                template_body={"name": "User", "email": email},
-                template_name="test"
+                template_body={"name": "User"},
+                template_name="askForLogin"
             )
     return JSONResponse(status_code=200, content={"success": True, "message": data})
 
@@ -221,24 +221,40 @@ async def check_cv_score_send_email(request: Request, background_tasks: Backgrou
             email = get_user_email(user)
             cv_score = calculate_cv_score(user)
             if cv_score >= 0 or cv_score <= 40:
-                # await send_email_background(
-                #     background_tasks=background_tasks,
-                #     body="",
-                #     email_to=email,
-                #     subject="Your CV score is low",
-                #     template_body={"name": "User", "email": email},
-                #     template_name="test"
-                # )
+                await send_email_background(
+                    background_tasks=background_tasks,
+                    body="",
+                    email_to=email,
+                    subject="Your CV score is low",
+                    template_body={"name": "User", "email": email},
+                    template_name="cvScore0to40"
+                )
                 print(email, cv_score, "greater than 0 or less than 40")
             elif cv_score >= 41 and cv_score < 70:
-                # send email
+                await send_email_background(
+                    background_tasks=background_tasks,
+                    body="",
+                    email_to=email,
+                    subject="Your CV score is low",
+                    template_body={"name": "User", "email": email},
+                    template_name="cvScore40to70"
+                )
                 print(email, cv_score, "greater than 41 and less than 70")
             elif cv_score >= 70:
-                # send email
+                await send_email_background(
+                    background_tasks=background_tasks,
+                    body="",
+                    email_to=email,
+                    subject="Your CV score is low",
+                    template_body={"name": "User", "email": email},
+                    template_name="cvScore70above"
+                )
                 print(email, cv_score, "greater than 70")
     background_tasks.add_task(check_cv_score_send_email, all_users)
 
     return JSONResponse(status_code=200, content={"success": True, "message": all_users})
+
+# end poiit to test email template
 
 
 @app.post('/test')

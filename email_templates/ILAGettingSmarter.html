@@ -40,11 +40,16 @@
 				display: block;
 				margin: 0;
 			}
+			.image {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 			.footer {
 				clear: both;
+				margin-top: 10px;
 				text-align: center;
-				padding-bottom: 10px;
-				height: 80px;
+				height: 100px;
 				width: 100%;
 				background-color: #000000;
 				font-family: IBM Plex Sans;
@@ -56,6 +61,13 @@
 				color: #999999;
 				font-size: 12px;
 				text-align: center;
+			}
+			.content {
+				font-family: IBM Plex Sans, Arial, sans-serif;
+				font-size: 14px;
+				line-height: 18px;
+				text-align: left;
+				color: #000000;
 			}
 			.Header {
 				width: 150px;
@@ -81,7 +93,7 @@
 		<![endif]-->
 		<!--[if !mso]><!-->
 		<link
-			href="https://fonts.googleapis.com/css?family=IBM Plex Sans:700,400,600"
+			href="https://fonts.googleapis.com/css?family=IBM Plex Sans:700,400"
 			rel="stylesheet"
 			type="text/css"
 		/>
@@ -147,6 +159,9 @@
 				td.Header {
 					width: 70% !important;
 				}
+				.content {
+					font-size: 10;
+				}
 			}
 		</style>
 		<style type="text/css">
@@ -172,6 +187,9 @@
 				margin-left: 0 !important;
 			}
 			@media only screen and (max-width: 599px) {
+				.content {
+					font-size: 10;
+				}
 				.emailify {
 					height: 100% !important;
 					margin: 0 !important;
@@ -213,23 +231,6 @@
 				}
 				div.r.pl-16 > table > tbody > tr > td {
 					padding-left: 16px !important;
-				}
-				td.b.fw-1 > table {
-					width: 100% !important;
-				}
-				td.fw-1 > table > tbody > tr > td > a {
-					display: block !important;
-					width: 100% !important;
-					padding-left: 0 !important;
-					padding-right: 0 !important;
-				}
-				td.b.fw-1 > table {
-					width: 100% !important;
-				}
-				td.fw-1 > table > tbody > tr > td {
-					width: 100% !important;
-					padding-left: 0 !important;
-					padding-right: 0 !important;
 				}
 			}
 		</style>
@@ -418,7 +419,7 @@
 									border: none;
 									direction: ltr;
 									font-size: 0;
-									padding: 30px 32px 0px 32px;
+									padding: 32px 32px 20px 32px;
 									text-align: left;
 								"
 							>
@@ -471,11 +472,13 @@
 													>
 														<tbody>
 															<tr>
-																<td class="fwm">
+																<td
+																	class="image"
+																>
 																	<img
 																		alt=""
 																		height="auto"
-																		src="https://i.ibb.co/jRt9sVz/Image-2.png"
+																		src="https://i.ibb.co/QMKNtb1/Group-1950.png"
 																		style="
 																			border: 0;
 																			border-radius: 0;
@@ -500,8 +503,7 @@
 													class="x"
 													style="
 														font-size: 0;
-														padding: 0px 82px 0px
-															82px;
+														padding: 0;
 														padding-bottom: 0;
 														word-break: break-word;
 													"
@@ -512,8 +514,8 @@
 																	Plex Sans,
 																Arial,
 																sans-serif;
-															font-size: 16px;
-															line-height: 21px;
+															font-size: 45px;
+															line-height: 40px;
 															text-align: center;
 															color: #000000;
 														"
@@ -527,7 +529,7 @@
 															<span
 																style="
 																	mso-line-height-rule: exactly;
-																	font-size: 28px;
+																	font-size: 32px;
 																	font-family: IBM
 																			Plex
 																			Sans,
@@ -535,14 +537,11 @@
 																		sans-serif;
 																	font-weight: 700;
 																	color: #141414;
-																	line-height: 34px;
+																	line-height: 40px;
 																"
-																>Your ILA for
-																Placements
-																subscription is
-																almost
-																over!</span
-															>
+																>ILA's getting
+																smarter!
+															</span>
 														</p>
 													</div>
 												</td>
@@ -591,7 +590,7 @@
 									border: none;
 									direction: ltr;
 									font-size: 0;
-									padding: 32px 32px 32px 32px;
+									padding: 20px 32px 20px 32px;
 									text-align: left;
 								"
 							>
@@ -663,41 +662,13 @@
 																	color: #141414;
 																	line-height: 18px;
 																"
-																>Hi {{insert
-																first
-																name}},</span
-															>
+																>Dear Users,
+															</span>
 														</p>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td
-													align="justify"
-													class="x"
-													style="
-														font-size: 0;
-														padding: 0;
-														padding-bottom: 0;
-														word-break: break-word;
-													"
-												>
-													<div
-														style="
-															font-family: IBM
-																	Plex Sans,
-																Arial,
-																sans-serif;
-															font-size: 14px;
-															line-height: 18px;
-															text-align: justify;
-															color: #000000;
-														"
-													>
 														<p
 															style="
-																margin: 0;
-																text-align: justify;
+																margin-top: 10px;
+																text-align: left;
 															"
 														>
 															<span
@@ -709,352 +680,38 @@
 																			Sans,
 																		Arial,
 																		sans-serif;
-																	font-weight: 400;
+																	font-weight: 700;
 																	color: #141414;
 																	line-height: 18px;
 																"
-																>Your
-																subscription at
+															>
+																Thank you for
+																subscribing to
 																ILA for
-																Placements is
-																ending tomorrow.
-																You will need to
-																renew your
-																subscription to
-																continue using
-																the complete
-																version of ILA
-																for Placements.
+																Placements. We
+																hope that ILA
+																has been helpful
+																to you so far!
 															</span>
-														</p>
-														<p style="margin: 0">
-															<span
-																style="
-																	mso-line-height-rule: exactly;
-																	font-size: 14px;
-																	font-family: IBM
-																			Plex
-																			Sans,
-																		Arial,
-																		sans-serif;
-																	font-weight: 400;
-																	color: #141414;
-																	line-height: 18px;
-																"
-																>&nbsp;</span
-															>
-														</p>
-														<p style="margin: 0">
-															<span
-																style="
-																	mso-line-height-rule: exactly;
-																	font-size: 14px;
-																	font-family: IBM
-																			Plex
-																			Sans,
-																		Arial,
-																		sans-serif;
-																	font-weight: 400;
-																	color: #141414;
-																	line-height: 18px;
-																"
-																>Within 24 hours
-																of this email,
-																your account
-																will be
-																downgraded to a
-																free
-																subscription.
-																You can still
-																continue to
-																access: 5
-																professional CV
-																templates
-																unlimited PDF
-																downloads, CV
-																tips and
-																analytics,
-																guided,
-																step-by-step CV
-																building (i.e.”
-																Build with
-																ILA”), and many
-																more special
-																features!</span
-															>
 														</p>
 													</div>
 												</td>
 											</tr>
-										</tbody>
-									</table>
-								</div>
-								<!--[if mso | IE]>
-</td></tr></table>
-<![endif]-->
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<!--[if mso | IE]>
-</td></tr></table>
-<table align="center" border="0" cellpadding="0" cellspacing="0" class="r-outlook -outlook pr-16-outlook pl-16-outlook -outlook" style="width:600px;" width="600" bgcolor="#fffffe"><tr><td style="line-height:0;font-size:0;mso-line-height-rule:exactly;">
-<![endif]-->
-			<div
-				class="r pr-16 pl-16"
-				style="
-					background: #fffffe;
-					background-color: #fffffe;
-					margin: 0px auto;
-					border-radius: 0;
-					max-width: 600px;
-				"
-			>
-				<table
-					align="center"
-					border="0"
-					cellpadding="0"
-					cellspacing="0"
-					style="
-						background: #fffffe;
-						background-color: #fffffe;
-						width: 100%;
-						border-radius: 0;
-					"
-				>
-					<tbody>
-						<tr>
-							<td
-								style="
-									border: none;
-									direction: ltr;
-									font-size: 0;
-									padding: 0px 32px 0px 32px;
-									text-align: left;
-								"
-							>
-								<!--[if mso | IE]>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td class="c-outlook -outlook -outlook" style="vertical-align:middle;width:536px;">
-<![endif]-->
-								<div
-									class="xc536 ogf c"
-									style="
-										font-size: 0;
-										text-align: left;
-										direction: ltr;
-										display: inline-block;
-										vertical-align: middle;
-										width: 100%;
-									"
-								>
-									<table
-										border="0"
-										cellpadding="0"
-										cellspacing="0"
-										style="
-											background-color: transparent;
-											border: none;
-											vertical-align: middle;
-										"
-										width="100%"
-									>
-										<tbody>
 											<tr>
 												<td
 													align="left"
-													vertical-align="middle"
-													class="b fw-1"
+													class="x m"
 													style="
 														font-size: 0;
 														padding: 0;
-														padding-bottom: 0;
+														padding-bottom: 8px;
 														word-break: break-word;
 													"
 												>
-													<table
-														border="0"
-														cellpadding="0"
-														cellspacing="0"
-														style="
-															border-collapse: separate;
-															width: 122px;
-															line-height: 100%;
-														"
-													>
-														<tbody>
-															<tr>
-																<td
-																	align="center"
-																	bgcolor="#fed400"
-																	style="
-																		border: none;
-																		border-radius: 60px
-																			60px
-																			60px
-																			60px;
-																		cursor: auto;
-																		mso-padding-alt: 12px
-																			0px
-																			12px
-																			0px;
-																		background: #fed400;
-																	"
-																	valign="middle"
-																>
-																	<a
-																		href="https://ilaforplacements.com/pricing"
-																		style="
-																			display: inline-block;
-																			width: 122px;
-																			background: #fed400;
-																			color: #ffffff;
-																			font-family: IBM
-																					Plex
-																					Sans,
-																				Arial,
-																				sans-serif;
-																			font-size: 13px;
-																			font-weight: normal;
-																			line-height: 100%;
-																			margin: 0;
-																			text-decoration: none;
-																			text-transform: none;
-																			padding: 12px
-																				0px
-																				12px
-																				0px;
-																			mso-padding-alt: 0;
-																			border-radius: 60px
-																				60px
-																				60px
-																				60px;
-																		"
-																		target="_blank"
-																	>
-																		<span
-																			style="
-																				mso-line-height-rule: exactly;
-																				font-size: 14px;
-																				font-family: IBM
-																						Plex
-																						Sans,
-																					Arial,
-																					sans-serif;
-																				font-weight: 700;
-																				color: #141414;
-																				line-height: 18px;
-																			"
-																			>Renew
-																			Now</span
-																		></a
-																	>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<!--[if mso | IE]>
-</td></tr></table>
-<![endif]-->
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<!--[if mso | IE]>
-</td></tr></table>
-<table align="center" border="0" cellpadding="0" cellspacing="0" class="r-outlook -outlook pr-16-outlook pl-16-outlook -outlook" style="width:600px;" width="600" bgcolor="#fffffe"><tr><td style="line-height:0;font-size:0;mso-line-height-rule:exactly;">
-<![endif]-->
-			<div
-				class="r pr-16 pl-16"
-				style="
-					background: #fffffe;
-					background-color: #fffffe;
-					margin: 0px auto;
-					border-radius: 0;
-					max-width: 600px;
-				"
-			>
-				<table
-					align="center"
-					border="0"
-					cellpadding="0"
-					cellspacing="0"
-					style="
-						background: #fffffe;
-						background-color: #fffffe;
-						width: 100%;
-						border-radius: 0;
-					"
-				>
-					<tbody>
-						<tr>
-							<td
-								style="
-									border: none;
-									direction: ltr;
-									font-size: 0;
-									padding: 30px 32px 0px 32px;
-									text-align: left;
-								"
-							>
-								<!--[if mso | IE]>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td class="c-outlook -outlook -outlook" style="vertical-align:middle;width:536px;">
-<![endif]-->
-								<div
-									class="xc536 ogf c"
-									style="
-										font-size: 0;
-										text-align: left;
-										direction: ltr;
-										display: inline-block;
-										vertical-align: middle;
-										width: 100%;
-									"
-								>
-									<table
-										border="0"
-										cellpadding="0"
-										cellspacing="0"
-										style="
-											background-color: transparent;
-											border: none;
-											vertical-align: middle;
-										"
-										width="100%"
-									>
-										<tbody>
-											<tr>
-												<td
-													align="left"
-													class="x"
-													style="
-														font-size: 0;
-														padding: 0;
-														padding-bottom: 0;
-														word-break: break-word;
-													"
-												>
-													<div
-														style="
-															font-family: IBM
-																	Plex Sans,
-																Arial,
-																sans-serif;
-															font-size: 14px;
-															line-height: 18px;
-															text-align: left;
-															color: #000000;
-														"
-													>
+													<div class="content">
 														<p
 															style="
-																margin: 0;
+																margin-top: 10px;
 																text-align: left;
 															"
 														>
@@ -1071,20 +728,141 @@
 																	color: #141414;
 																	line-height: 18px;
 																"
-															>
-																If you have any
-																questions, you
-																can reach my
-																team at
-																<b
-																	>admin@ilaforplacements.com</b
-																>
-																and we’ll be
-																happy to assist
-																you!</span
+																>When ILA came
+																into your lives,
+																she had just
+																entered the
+																alpha stage of
+																her journey. The
+																more you use
+																ILA, the smarter
+																she gets, and
+																the more she can
+																do for you! Over
+																the last few
+																months, thanks
+																to your support,
+																ILA has gone
+																through rigorous
+																training.</span
 															>
 														</p>
-													</div>
+                                                            <p style="margin-top: 20px"><span
+																style="
+																	mso-line-height-rule: exactly;
+																	font-size: 14px;
+																	font-family: IBM
+																			Plex
+																			Sans,
+																		Arial,
+																		sans-serif;
+																	font-weight: 400;
+																	color: #141414;
+																	line-height: 18px;
+																"
+																>We are very
+																excited to share
+																that ILA is now
+																entering her
+																“beta-testing”
+																phase. This is
+																the point where
+																ILA needs your
+																help the most.
+															</span>
+														</p>
+														<p
+															style="
+																margin-top: 20px;
+															"
+														>
+															<span
+																style="
+																	mso-line-height-rule: exactly;
+																	font-size: 14px;
+																	font-family: IBM
+																			Plex
+																			Sans,
+																		Arial,
+																		sans-serif;
+																	font-weight: 400;
+																	color: #141414;
+																	line-height: 18px;
+																"
+															>
+                                                            So stay tuned and gear up to explore ILA’s new features and offerings, coming your way very soon. 
+															</span>
+														</p>
+                                                        <p
+                                                        style="
+                                                            margin-top: 20px;
+                                                        "
+                                                    >
+                                                        <span
+                                                            style="
+                                                                mso-line-height-rule: exactly;
+                                                                font-size: 14px;
+                                                                font-family: IBM
+                                                                        Plex
+                                                                        Sans,
+                                                                    Arial,
+                                                                    sans-serif;
+                                                                font-weight: 400;
+                                                                color: #141414;
+                                                                line-height: 18px;
+                                                            "
+                                                        >
+                                                        During this time, please also share your feedback with us, so that ILA can continue to do better for you as she grows and learns.                                                        </span>
+                                                    </p>
+                                                    <p
+                                                    style="
+                                                        margin-top: 20px;
+                                                    "
+                                                >
+                                                    <span
+                                                        style="
+                                                            mso-line-height-rule: exactly;
+                                                            font-size: 14px;
+                                                            font-family: IBM
+                                                                    Plex
+                                                                    Sans,
+                                                                Arial,
+                                                                sans-serif;
+                                                            font-weight: 400;
+                                                            color: #141414;
+                                                            line-height: 18px;
+                                                        "
+                                                    >
+                                                    You can reach us here:<br />
+                                                    Email: admin@ilaforplacements.com<br />
+                                                    Instagram: ilabyfineprint<br />
+                                                    LinkedIn: FinePrint
+                                                                                                    </p>
+                                                                                                    <p
+                                                                                                    style="
+                                                                                                        margin-top: 20px;
+                                                                                                    "
+                                                                                                >
+                                                                                                    <span
+                                                                                                        style="
+                                                                                                            mso-line-height-rule: exactly;
+                                                                                                            font-size: 14px;
+                                                                                                            font-family: IBM
+                                                                                                                    Plex
+                                                                                                                    Sans,
+                                                                                                                Arial,
+                                                                                                                sans-serif;
+                                                                                                            font-weight: 400;
+                                                                                                            color: #141414;
+                                                                                                            line-height: 18px;
+                                                                                                        "
+                                                                                                    >
+                                                                                                    
+Thank you for your support. 
+
+                                                                                                                                                    </p>
+                                                
+                                                </div>
 												</td>
 											</tr>
 										</tbody>
@@ -1098,6 +876,10 @@
 					</tbody>
 				</table>
 			</div>
+			<!--[if mso | IE]>
+</td></tr></table>
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="r-outlook -outlook pr-16-outlook pl-16-outlook -outlook" style="width:600px;" width="600" bgcolor="#fffffe"><tr><td style="line-height:0;font-size:0;mso-line-height-rule:exactly;">
+<![endif]-->
 			<!--[if mso | IE]>
 </td></tr></table>
 <table align="center" border="0" cellpadding="0" cellspacing="0" class="r-outlook -outlook pr-16-outlook pl-16-outlook -outlook" style="width:600px;" width="600" bgcolor="#fffffe"><tr><td style="line-height:0;font-size:0;mso-line-height-rule:exactly;">
@@ -1131,7 +913,7 @@
 									border: none;
 									direction: ltr;
 									font-size: 0;
-									padding: 32px 32px 20px 32px;
+									padding: 0px 32px 10px 32px;
 									text-align: left;
 								"
 							>
@@ -1203,13 +985,9 @@
 																	color: #141414;
 																	line-height: 18px;
 																"
-																>Warm regards,
-																<br />
-																ILA <br />
-																Your
-																one-stop-shop
-																for CV and
-																placement needs
+																>Best regards,<br/>
+                                                                Team at ILA for Placements
+                                                                
 															</span>
 														</p>
 													</div>
@@ -1225,197 +1003,84 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
-			<!--[if mso | IE]>
+				<!--[if mso | IE]>
 </td></tr></table>
 <table align="center" border="0" cellpadding="0" cellspacing="0" class="r-outlook -outlook pr-16-outlook pl-16-outlook -outlook" style="width:600px;" width="600" bgcolor="#141414"><tr><td style="line-height:0;font-size:0;mso-line-height-rule:exactly;">
 <![endif]-->
-			<div
-				class="r pr-16 pl-16"
-				style="
-					background: #141414;
-					background-color: #141414;
-					margin: 0px auto;
-					border-radius: 0;
-					max-width: 600px;
-				"
-			>
-				<table
-					align="center"
-					border="0"
-					cellpadding="0"
-					cellspacing="0"
-					style="
-						background: #141414;
-						background-color: #141414;
-						width: 100%;
-						border-radius: 0;
-					"
-				>
-					<tbody>
-						<tr>
-							<td
-								style="
-									border: none;
-									direction: ltr;
-									font-size: 0;
-									padding: 10px 16px 10px 16px;
-									text-align: left;
-								"
-							>
-								<!--[if mso | IE]>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="width:568px;">
-<![endif]-->
-								<div
-									class="pc100 ogf"
-									style="
-										font-size: 0;
-										line-height: 0;
-										text-align: left;
-										display: inline-block;
-										width: 100%;
-										direction: ltr;
-									"
+				<div class="footer">
+					<table align="center">
+						<tr align="center">
+							<td>
+								<a
+									href="https://www.linkedin.com/company/fineprint-legal/"
+									style="text-decoration: none"
 								>
-									<!--[if mso | IE]>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:138px;">
-<![endif]-->
-									<div
-										class="pc24-295774647887324 ogf"
+									<img
+										src="https://i.ibb.co/Mk2R956/Ellipse-1-1.png"
+										width="30px"
+										height="30px"
 										style="
-											font-size: 0;
-											text-align: left;
-											direction: ltr;
-											display: inline-block;
-											vertical-align: top;
-											width: 24.295774647887324%;
+											margin-top: 10px;
+											margin-left: 5px;
 										"
-									>
-										<table
-											border="0"
-											cellpadding="0"
-											cellspacing="0"
-											width="100%"
-										>
-											<tbody>
-												<tr>
-													<td
-														style="
-															vertical-align: top;
-															padding: 0;
-														"
-													>
-														<table
-															border="0"
-															cellpadding="0"
-															cellspacing="0"
-															width="100%"
-														>
-															<tbody></tbody>
-														</table>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<!--[if mso | IE]>
-</td><td style="vertical-align:middle;width:430px;">
-<![endif]-->
-									<div class="footer">
-										<table align="center">
-											<tr align="center">
-												<td>
-													<a
-														href="https://www.linkedin.com/company/fineprint-legal/"
-														style="
-															text-decoration: none;
-														"
-													>
-														<img
-															src="https://i.ibb.co/Mk2R956/Ellipse-1-1.png"
-															width="30px"
-															height="30px"
-															style="
-																margin-top: 10px;
-																margin-left: 5px;
-															"
-														/>
-													</a>
-													<a
-														href="https://www.instagram.com/ilabyfineprint/"
-														style="
-															text-decoration: none;
-														"
-													>
-														<img
-															src="https://i.ibb.co/vscB9Wp/Ellipse-2-1.png"
-															width="30px"
-															height="30px"
-															style="
-																margin-left: 5px;
-															"
-														/>
-													</a>
-													<a
-														href="https://www.facebook.com/FinePrint-109826954762942"
-														style="
-															text-decoration: none;
-														"
-													>
-														<img
-															src="https://i.ibb.co/4FpJwzL/Ellipse-3-1.png"
-															width="30px"
-															height="30px"
-															style="
-																margin-left: 5px;
-															"
-														/>
-													</a>
-												</td>
-											</tr>
-											<tr align="center">
-												<td>
-													<img
-														src="https://f002.backblazeb2.com/file/emailify/48454fe5c52acfd99f5a1952dac49108.png"
-														width="137px"
-														height="40px"
-														style="margin-top: 8px"
-													/>
-												</td>
-											</tr>
-											<tr style="height: 30px">
-												<td>
-													<p
-														style="
-															color: #000000;
-															font-size: 13px;
-															line-height: 16px;
-															width: 100%;
-															text-align: center;
-															padding-top: 15px;
-															padding-bottom: 15px;
-														"
-													>
-														All copyrights reserved
-														@ Fineprint Legal
-														Technologies Pvt. Ltd.
-													</p>
-												</td>
-											</tr>
-										</table>
-									</div>
-									<!--[if mso | IE]>
-</td></tr></table>
-<![endif]-->
-								</div>
-								<!--[if mso | IE]>
-</td></tr></table>
-<![endif]-->
+									/>
+								</a>
+								<a
+									href="https://www.instagram.com/ilabyfineprint/"
+									style="text-decoration: none"
+								>
+									<img
+										src="https://i.ibb.co/vscB9Wp/Ellipse-2-1.png"
+										width="30px"
+										height="30px"
+										style="margin-left: 5px"
+									/>
+								</a>
+								<a
+									href="https://www.facebook.com/FinePrint-109826954762942"
+									style="text-decoration: none"
+								>
+									<img
+										src="https://i.ibb.co/4FpJwzL/Ellipse-3-1.png"
+										width="30px"
+										height="30px"
+										style="margin-left: 5px"
+									/>
+								</a>
 							</td>
 						</tr>
-					</tbody>
-				</table>
+						<tr align="center">
+							<td>
+								<img
+									src="https://f002.backblazeb2.com/file/emailify/48454fe5c52acfd99f5a1952dac49108.png"
+									width="137px"
+									height="40px"
+									style="margin-top: 8px"
+								/>
+							</td>
+						</tr>
+						<tr style="height: 30px">
+							<td>
+								<p
+									style="
+										color: #000000;
+										font-size: 13px;
+										line-height: 16px;
+										width: 100%;
+										text-align: center;
+										padding-top: 5px;
+										padding-bottom: 10px;
+									"
+								>
+									All copyrights reserved @ Fineprint Legal
+									Technologies Pvt. Ltd.
+								</p>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
+
 			<!--[if mso | IE]>
 </td></tr></table>
 <table align="center" border="0" cellpadding="0" cellspacing="0" class="r-outlook -outlook pr-16-outlook pl-16-outlook -outlook" style="width:600px;" width="600" bgcolor="#eeeeee"><tr><td style="line-height:0;font-size:0;mso-line-height-rule:exactly;">

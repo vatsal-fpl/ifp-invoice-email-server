@@ -101,17 +101,14 @@ async def send_mail_with_attachment(request: Request, background_tasks: Backgrou
 async def fetch_invoice(request: Request, background_tasks: BackgroundTasks):
     try:
         query = request.query_params
-        invoice_id = query.get('invoiceNumber')
-        folder_name = invoice_id.split("/")[0]
-        invoice_no = "Invoice_" + invoice_id.split("/")[1]
-        print(invoice_no)
-        path = BASE_DIR + f"/invoices/{folder_name}/{invoice_no}"+".pdf"
+        invoice_no = query.get('invoiceNumber')
+        path = BASE_DIR + f"/invoices/{invoice_no}"+".pdf"
         print(path)
         if os.path.exists(path):
             background_tasks.add_task(delete_file, path)
             return FileResponse(path, media_type="application/pdf", filename=f"{invoice_no}.pdf")
         else:
-            logger.error(f"Invoice not found for {invoice_id}")
+            logger.error(f"Invoice not found for {invoice_no}")
             return JSONResponse(status_code=404, content={"message": "Invoice not found"})
     except Exception as e:
         logger.error(e)

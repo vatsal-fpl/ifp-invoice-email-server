@@ -854,3 +854,6 @@
 2022-06-17 11:41:39,045 : INFO : utils : Email sent to shubh@fineprint.legal
 2022-06-17 11:44:12,799 : INFO : utils : Email sent to shubh@fineprint.legal
 2022-06-17 12:14:17,042 : INFO : utils : Email sent to shubh@fineprint.legal
+2022-06-18 10:47:42,431 : INFO : main : Request from: 127.0.0.1
+2022-06-18 10:47:42,431 : INFO : main : Request from: 127.0.0.1
+2022-06-18 10:48:52,830 : INFO : utils : File deleted from C:\Users\vatsal\Desktop\FastApiMailNew/invoices/pay_JUE86Xh0EEdOYB.pdf

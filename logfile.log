@@ -857,3 +857,8 @@
 2022-06-18 10:47:42,431 : INFO : main : Request from: 127.0.0.1
 2022-06-18 10:47:42,431 : INFO : main : Request from: 127.0.0.1
 2022-06-18 10:48:52,830 : INFO : utils : File deleted from C:\Users\vatsal\Desktop\FastApiMailNew/invoices/pay_JUE86Xh0EEdOYB.pdf
+2022-06-20 10:47:25,345 : INFO : utils : Email sent to vatsal@fineprint.legal
+2022-06-20 10:47:25,346 : INFO : utils : Invoice sent to vatsal@fineprint.legal
+2022-06-20 10:49:34,468 : INFO : utils : Email sent to vatsal@fineprint.legal
+2022-06-20 10:49:34,468 : INFO : utils : Invoice sent to vatsal@fineprint.legal
+2022-06-20 10:49:39,187 : INFO : utils : File deleted from C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx

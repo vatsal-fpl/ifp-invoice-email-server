@@ -318,7 +318,7 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
                 else:
                     template_name = "subscriptionExpiredPaid"
             if n_day == 7:
-                template_name = "sevenDayRemainingPaid"
+                template_name = "sevenDaysRemainingPaid"
                 template_body = {"name": user_name, "daysLeft": str(n_day), "endDate": str(
                     endDate), "nextDate": str(nextDate), "plan": user_plan}
 

@@ -399,7 +399,7 @@ async def create_invoice_document2(document_context, background_tasks: Backgroun
         subprocess.run(
             ["doc2pdf", docx_path])
         subprocess.run(
-            ["mv", f"generated_documents/"+f"{invoice_no}"+'.pdf', f"{BASE_DIR}/invoices/{folder_name}/"])
+            ["mv", f"generated_documents/"+f"{invoice_no}"+'.pdf', f"{BASE_DIR}/invoices/"])
     except:
         print('Error converting docx to pdf!')
 

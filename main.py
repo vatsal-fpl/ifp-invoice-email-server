@@ -212,42 +212,46 @@ async def check_login_status_send_email(request: Request, background_tasks: Back
 @app.post('/check_cv_score_send_email')
 async def check_cv_score_send_email(request: Request, background_tasks: BackgroundTasks) -> JSONResponse:
     all_users = await get_all_users('ifp-b2c-prod')
-
-    async def check_cv_score_send_email(all_users):
-        for user in all_users:
-            email = get_user_email(user)
-            cv_score = calculate_cv_score(user)
-            if cv_score >= 0 or cv_score <= 40:
-                await send_email_background(
-                    background_tasks=background_tasks,
-                    body="",
-                    email_to=email,
-                    subject="Your CV score is low",
-                    template_body={"name": "User", "email": email},
-                    template_name="cvScore0to40"
-                )
-                print(email, cv_score, "greater than 0 or less than 40")
-            elif cv_score >= 41 and cv_score < 70:
-                await send_email_background(
-                    background_tasks=background_tasks,
-                    body="",
-                    email_to=email,
-                    subject="Your CV score is low",
-                    template_body={"name": "User", "email": email},
-                    template_name="cvScore40to70"
-                )
-                print(email, cv_score, "greater than 41 and less than 70")
-            elif cv_score >= 70:
-                await send_email_background(
-                    background_tasks=background_tasks,
-                    body="",
-                    email_to=email,
-                    subject="Your CV score is low",
-                    template_body={"name": "User", "email": email},
-                    template_name="cvScore70above"
-                )
-                print(email, cv_score, "greater than 70")
-    background_tasks.add_task(check_cv_score_send_email, all_users)
+    try:
+        async def check_cv_score_send_email(all_users):
+            for user in all_users:
+                email = await get_user_email(user)
+                name = await get_username(user)
+                cv_score = calculate_cv_score(user)
+                if cv_score >= 0 or cv_score <= 40:
+                    await send_email_background(
+                        background_tasks=background_tasks,
+                        body="",
+                        email_to=email,
+                        subject="Your CV score is low",
+                        template_body={"name": name},
+                        template_name="cvScore0to40"
+                    )
+                    print(email, cv_score, "greater than 0 or less than 40")
+                elif cv_score >= 41 and cv_score < 70:
+                    await send_email_background(
+                        background_tasks=background_tasks,
+                        body="",
+                        email_to=email,
+                        subject="Your CV score is low",
+                        template_body={"name": name},
+                        template_name="cvScore40to70"
+                    )
+                    print(email, cv_score, "greater than 41 and less than 70")
+                elif cv_score >= 70:
+                    await send_email_background(
+                        background_tasks=background_tasks,
+                        body="",
+                        email_to=email,
+                        subject="Your CV score is low",
+                        template_body={"name": name},
+                        template_name="cvScore70above"
+                    )
+                    print(email, cv_score, "greater than 70")
+        background_tasks.add_task(check_cv_score_send_email, all_users)
+    except Exception as e:
+        print(e)
+        logger.error(e)
 
     return JSONResponse(status_code=200, content={"success": True, "message": all_users})
 
@@ -261,7 +265,7 @@ async def test(request: Request, background_tasks: BackgroundTasks) -> JSONRespo
         email_to="vatsal@fineprint.legal",
         template_name="freeTrialEndingInNdays",
         template_body={"name": "Vatsal", "daysLeft": "5",
-                       "endDate": "2020-01-01", "nextDate": "2020-01-06"},
+                       "endDate": "2020-01-01", "nextDate": "2020-01-06", "extra": "data"},
         background_tasks=background_tasks
     )
     return JSONResponse(status_code=200, content={"success": True, "message": "email has been sent in background"})

@@ -294,7 +294,7 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
     if endDate < date_now:
         print("Subscription expired")
         # change template for subscription expired
-        template_name = "subscriptionExpired"
+        template_name = "subscriptionExpiredPaid"
         await send_email_background(
             background_tasks=background_tasks,
             subject="Subscription expired",

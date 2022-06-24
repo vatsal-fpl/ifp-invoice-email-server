@@ -14,6 +14,7 @@ from utils import send_email_background, delete_file, create_invoice_document, c
 from logger import get_logger
 from pydantic import BaseSettings
 from models.invoice import Invoice
+from cronjob import *
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -254,8 +255,6 @@ async def check_cv_score_send_email(request: Request, background_tasks: Backgrou
         logger.error(e)
 
     return JSONResponse(status_code=200, content={"success": True, "message": all_users})
-
-# end poiit to test email template
 
 
 @app.post('/test')

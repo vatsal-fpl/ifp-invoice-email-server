@@ -350,15 +350,15 @@ async def create_invoice_document(document_context, background_tasks: Background
         os.makedirs(invoice_path)
     docx_path = BASE_DIR + f"/generated_documents/"+str(invoice_no)+".docx"
     doc.save(docx_path)
-    subprocess.check_output([libreoffice_path, '--headless', '--invisible', '--convert-to',
-                            'pdf', f"generated_documents/{invoice_no}.docx", '--outdir', f"invoices/{folder_name}/"])
-    # try:
-    #     subprocess.run(
-    #         ["doc2pdf", docx_path])
-    #     subprocess.run(
-    #         ["mv", f"generated_documents/"+f"{invoice_no}"+'.pdf', f"{BASE_DIR}/invoices/{folder_name}/"])
-    # except:
-    #     print('Error converting docx to pdf!')
+    # subprocess.check_output([libreoffice_path, '--headless', '--invisible', '--convert-to',
+    #                         'pdf', f"generated_documents/{invoice_no}.docx", '--outdir', f"invoices/{folder_name}/"])
+    try:
+        subprocess.run(
+            ["doc2pdf", docx_path])
+        subprocess.run(
+            ["mv", f"generated_documents/"+f"{invoice_no}"+'.pdf', f"{BASE_DIR}/invoices/{folder_name}/"])
+    except:
+        print('Error converting docx to pdf!')
 
     userId = document_context.get("userId")
     user_name = get_username(userId)
@@ -438,10 +438,9 @@ async def check_subscription_send_email_free(background_tasks: BackgroundTasks):
                   for subcription in all_subscription]
     student_collection = get_collection(database, "student")
     all_students = student_collection.find()
-    free_users = [{"_id": user['_id'],
-                   "createdDate":int(datetime.datetime.strptime(user["createdDate"], '%Y-%m-%d').timestamp()),
-                   "email":user["email"],
-                   "endDate":int(datetime.datetime.strptime(user["createdDate"], '%Y-%m-%d').timestamp()) + (10*24*60*60)
+    free_users = [{"_id": str(user.get('_id')),
+                   "email": str(user.get('email')),
+                   "endDate": int(datetime.datetime.strptime(user.get("createdDate"), '%Y-%m-%d').timestamp()) + (10*24*60*60)
                    } for user in all_users if user['_id'] not in paid_users]
     for student in all_students:
         for user in free_users:

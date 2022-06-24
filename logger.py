@@ -1,7 +1,7 @@
 import logging
 
 
-def get_logger(name):
+def get_logger(name, ):
     logger = logging.getLogger(name=name)
     logger.setLevel(logging.INFO)
     file_handler = logging.FileHandler('logfile.log')

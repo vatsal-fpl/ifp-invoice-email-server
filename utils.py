@@ -60,7 +60,6 @@ async def send_email_async(subject, email_to, template_body=None, body=None, tem
 
     fm = FastMail(conf)
     await fm.send_message(message, template_name=template_name)
-    logger.info("Email sent to {}".format(email_to))
 # ----------------------------------------------------------------
 
 
@@ -82,7 +81,6 @@ async def send_email_background(background_tasks: BackgroundTasks, subject, emai
 
     background_tasks.add_task(fm.send_message, message,
                               template_name=template_name)
-    logger.info("Email sent to {}".format(email_to))
 
 # ----------------------------------------------------------------
 
@@ -112,7 +110,6 @@ async def send_mail_with_attachment_background(subject, email_to, path, backgrou
     background_tasks.add_task(fm.send_message, message,
                               template_name=template_name)
 
-    logger.info("Email sent to {}".format(email_to))
 
 # ----------------------------------------------------------------
 
@@ -120,12 +117,9 @@ async def send_mail_with_attachment_background(subject, email_to, path, backgrou
 def delete_file(path):
     try:
         os.remove(path)
-        logger.info("File deleted from {}".format(path))
         print("file deleted")
     except Exception as e:
         print(e)
-        logger.error(e)
-
 # ----------------------------------------------------------------
 
 
@@ -142,7 +136,6 @@ def get_username(user_id):
 
 
 def calculate_cv_score(user_id):
-    logger.info("Calculating cv score for user {}".format(user_id))
     net_score = 0
     student = get_collection(
         "ifp-b2c-prod", "student").find_one({"userId": ObjectId(user_id)})
@@ -259,11 +252,9 @@ async def check_subscription_free(endDate, n_days, user_email, user_name, backgr
             background_tasks=background_tasks
         )
         print("Subscription expired")
-        logger.info("Subscription expired for {}".format(user_email))
     for n_day in n_days:
         timedelta = datetime.timedelta(days=n_day)
         if (endDate-timedelta) == date_now:
-            logger.info(f"Subscription about to expire for {user_email}")
             nextDate = endDate + datetime.timedelta(days=1)
             await send_email_background(
                 background_tasks=background_tasks,
@@ -275,10 +266,8 @@ async def check_subscription_free(endDate, n_days, user_email, user_name, backgr
                 template_name="freeTrialEndingInNdays",
             )
             print("Subscription about to expire")
-            logger.info(
-                f"Subscription about to expire mail sent to {user_email}")
     if (endDate - timedelta) > date_now:
-        logger.info(f"Subscription is valid for {user_email}")
+        print(f"Subscription is valid for {user_email}")
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -302,7 +291,6 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
             template_name=template_name,
             template_body=template_body,
         )
-        logger.info("Subscription expired for {}".format(user_email))
     for n_day in n_days:
         print(f"Checking subscription for {n_day} days")
         timedelta = datetime.timedelta(days=n_day)
@@ -329,11 +317,9 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
                 template_body=template_body,
                 background_tasks=background_tasks
             )
-            logger.info(
-                f"Subscription about to expire mail sent to {user_email}")
 
     if (endDate - timedelta) > date_now:
-        logger.info(f"Subscription is valid for {user_email}")
+        print(f"Subscription is valid for {user_email}")
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -379,7 +365,6 @@ async def create_invoice_document(document_context, background_tasks: Background
             background_tasks=background_tasks
         )
         background_tasks.add_task(delete_file, docx_path)
-        logger.info(f"Invoice sent to {document_context.get('billEmail')}")
 
 
 # ------------------------------------------------------------------------------------------------------------
@@ -424,10 +409,10 @@ async def create_invoice_document2(document_context, background_tasks: Backgroun
             background_tasks=background_tasks
         )
         background_tasks.add_task(delete_file, docx_path)
-        logger.info(f"Invoice sent to {document_context.get('billEmail')}")
-
 
 # ---------------------- Check Subscription Status for free users
+
+
 async def check_subscription_send_email_free(background_tasks: BackgroundTasks):
     database = 'ifp-b2c-prod'
     subscritpion_collection = get_collection(database, "subscription")

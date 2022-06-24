@@ -109,10 +109,9 @@ async def fetch_invoice(request: Request, background_tasks: BackgroundTasks):
             background_tasks.add_task(delete_file, path)
             return FileResponse(path, media_type="application/pdf", filename=f"{invoice_no}.pdf")
         else:
-            logger.error(f"Invoice not found for {invoice_no}")
             return JSONResponse(status_code=404, content={"message": "Invoice not found"})
     except Exception as e:
-        logger.error(e)
+        print(e)
         return JSONResponse(status_code=500, content={"message": "Internal Server Error"})
 
 
@@ -126,7 +125,7 @@ async def create_send_invoice_with_docx(invoice: Invoice, request: Request, back
             await create_invoice_document2(document_context, background_tasks)
             return JSONResponse(status_code=200, content={"success": True, "message": "invoice has been created"})
         except Exception as e:
-            logger.error(e)
+            print(e)
     else:
         return JSONResponse(status_code=403, content={'message': 'Oops! You are not allowed to access this server.'})
 
@@ -139,7 +138,7 @@ async def check_subscription_free(request: Request, background_tasks: Background
             await check_subscription_send_email_free(background_tasks=background_tasks)
             return JSONResponse(status_code=200, content={"success": True, "message": "subscription has been checked"})
         except Exception as e:
-            logger.error(e)
+            print(e)
             return JSONResponse(status_code=500, content={"success": False, "message": "Internal Server Error"})
     else:
         return JSONResponse(status_code=403, content={'message': 'Oops! You are not allowed to access this server.'})
@@ -153,7 +152,7 @@ async def check_subscription_paid(request: Request, background_tasks: Background
             await check_subscription_send_email_paid(background_tasks=background_tasks)
             return JSONResponse(status_code=200, content={"success": True, "message": "subscription has been checked"})
         except Exception as e:
-            logger.error(e)
+            print(e)
             return JSONResponse(status_code=500, content={"success": False, "message": "Internal Server Error"})
     else:
         return JSONResponse(status_code=403, content={'message': 'Oops! You are not allowed to access this server.'})
@@ -252,7 +251,6 @@ async def check_cv_score_send_email(request: Request, background_tasks: Backgrou
         background_tasks.add_task(check_cv_score_send_email, all_users)
     except Exception as e:
         print(e)
-        logger.error(e)
 
     return JSONResponse(status_code=200, content={"success": True, "message": all_users})
 

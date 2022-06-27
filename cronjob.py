@@ -17,3 +17,9 @@ def check_free_users_subscription_cron():
     url = 'http://127.0.0.1:8000/check_subscription_free'
     result = requests.post(url=url, headers=headers)
     print(result.json())
+
+
+if __name__ == '__main__':
+    # check_free_users_subscription_cron()
+    # check_paid_users_subscription_cron()
+    pass  # delete this line before running code

@@ -31,7 +31,6 @@ settings = Settings()
 load_dotenv('./.env')
 
 WHITELISTED_IPS = json.loads(os.getenv('WHITELISTED_IPS'))
-logger = get_logger("main")
 
 origins = ["*"]
 app = FastAPI(openapi_url=settings.openapi_url)

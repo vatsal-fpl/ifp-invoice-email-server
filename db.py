@@ -1,3 +1,4 @@
+from asyncio.log import logger
 import pymongo
 import os
 from dotenv import load_dotenv

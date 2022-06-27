@@ -19,7 +19,8 @@ from logger import get_logger
 load_dotenv('./.env')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-logger = get_logger('utils')
+logger1 = get_logger('typeOne', 'logfile1.log')
+logger2 = get_logger('typeTwo', 'logfile2.log')
 
 if platform.system() == "Windows":
     libreoffice_path = os.environ.get(
@@ -117,8 +118,10 @@ async def send_mail_with_attachment_background(subject, email_to, path, backgrou
 def delete_file(path):
     try:
         os.remove(path)
+        logger1.info(f"file deleted from path {path}")
         print("file deleted")
     except Exception as e:
+        logger1.info(e)
         print(e)
 # ----------------------------------------------------------------
 
@@ -208,7 +211,7 @@ async def get_all_users(database):
 # ----------------------------------------------------------------------------------------
 
 
-def get_paid_users(database, collection):
+async def get_paid_users(database, collection):
     subscriptions = get_collection(database, collection).find({})
     paid_users = [str(subscription.get('userId'))
                   for subscription in subscriptions]
@@ -252,6 +255,7 @@ async def check_subscription_free(endDate, n_days, user_email, user_name, backgr
             background_tasks=background_tasks
         )
         print("Subscription expired")
+        logger2.info(f"{'freeTrialExpired'}:{user_email}")
     for n_day in n_days:
         timedelta = datetime.timedelta(days=n_day)
         if (endDate-timedelta) == date_now:
@@ -265,6 +269,7 @@ async def check_subscription_free(endDate, n_days, user_email, user_name, backgr
                     n_day), "endDate": str(endDate), "nextDate": str(nextDate)},
                 template_name="freeTrialEndingInNdays",
             )
+            logger2.info(f"{'freeTrialEndingInNdays'}:{user_email}")
             print("Subscription about to expire")
     if (endDate - timedelta) > date_now:
         print(f"Subscription is valid for {user_email}")
@@ -291,6 +296,7 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
             template_name=template_name,
             template_body=template_body,
         )
+        logger2.info(f"{template_name}:{user_email}")
     for n_day in n_days:
         print(f"Checking subscription for {n_day} days")
         timedelta = datetime.timedelta(days=n_day)
@@ -317,6 +323,7 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
                 template_body=template_body,
                 background_tasks=background_tasks
             )
+            logger2.info(f"{template_name}:{user_email}")
 
     if (endDate - timedelta) > date_now:
         print(f"Subscription is valid for {user_email}")
@@ -364,6 +371,8 @@ async def create_invoice_document(document_context, background_tasks: Background
             },
             background_tasks=background_tasks
         )
+        user_email = document_context.get("billEmail")
+        logger2.info(f"{'newSubscriptionActived'}:{user_email}")
         background_tasks.add_task(delete_file, docx_path)
 
 
@@ -408,7 +417,10 @@ async def create_invoice_document2(document_context, background_tasks: Backgroun
             },
             background_tasks=background_tasks
         )
+        user_email = document_context.get("billEmail")
+        logger2.info(f"{'newSubscriptionActived'}:{user_email}")
         background_tasks.add_task(delete_file, docx_path)
+
 
 # ---------------------- Check Subscription Status for free users
 

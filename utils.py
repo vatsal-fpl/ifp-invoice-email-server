@@ -285,8 +285,7 @@ async def check_subscription_free(endDate, n_days, user_email, user_name, backgr
 async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_name, background_tasks: BackgroundTasks):
     print("inside the check subscription paid ------------------------------")
     date_now = datetime.datetime.now().date()
-    endDate = datetime.datetime.fromtimestamp(
-        (datetime.datetime.strptime(endDate, "%Y-%m-%d").timestamp())/1000).date()
+    endDate = datetime.datetime.strptime("2022-06-27", "%Y-%m-%d").date()
     print(endDate, "-----------------", user_email)
     template_body = {
         "name": user_name,

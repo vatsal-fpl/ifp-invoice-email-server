@@ -58,3 +58,15 @@
 2022-06-28 14:50:04,435 : INFO : general_logs : Requested /check_subscription_paid endpoint
 2022-06-28 14:50:04,435 : INFO : general_logs : Requested /check_subscription_paid endpoint
 2022-06-28 14:50:04,435 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 14:54:17,092 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 14:54:17,092 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 14:54:17,092 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 14:59:12,553 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 14:59:12,553 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 14:59:12,553 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 14:59:12,839 : INFO : general_logs : can't compare datetime.datetime to datetime.date
+2022-06-28 14:59:12,839 : INFO : general_logs : can't compare datetime.datetime to datetime.date
+2022-06-28 14:59:12,839 : INFO : general_logs : can't compare datetime.datetime to datetime.date
+2022-06-28 15:05:27,786 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 15:05:27,786 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 15:05:27,786 : INFO : general_logs : Requested /check_subscription_paid endpoint

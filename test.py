@@ -1,5 +1,6 @@
-import datetime
+from db import *
 
-endDate = datetime.datetime.strptime("2022-06-27", "%Y-%m-%d").date()
-date_now = datetime.datetime.now().date()
-print(endDate < date_now)
+subscriptions = get_collection("ifp-b2c-prod", "subscription").find({})
+paid_users = [str(subscription.get('userId'))
+              for subscription in subscriptions]
+print(paid_users)

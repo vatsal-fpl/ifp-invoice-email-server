@@ -284,17 +284,36 @@ async def check_cv_score_send_email(request: Request, background_tasks: Backgrou
     return JSONResponse(status_code=200, content={"success": True, "message": all_users})
 
 
-@app.post('/test')
-async def test(request: Request, background_tasks: BackgroundTasks) -> JSONResponse:
-    await send_email_background(
-        subject="Subscription expired",
-        email_to="vatsal@fineprint.legal",
-        template_name="freeTrialEndingInNdays",
-        template_body={"name": "Vatsal", "daysLeft": "5",
-                       "endDate": "2020-01-01", "nextDate": "2020-01-06", "extra": "data"},
-        background_tasks=background_tasks
-    )
-    return JSONResponse(status_code=200, content={"success": True, "message": "email has been sent in background"})
+@app.post('/send_bulk_emails')
+async def send_invite_email(request: Request, background_tasks: BackgroundTasks) -> JSONResponse:
+    try:
+        data = await request.json()
+        email_list = data.get("email_list")
+        paid_users = await get_paid_users("ifp-b2c-prod", "subscription")
+        # change email_list to paid_user_email_list
+        paid_user_email_list = [get_user_email(
+            user_id) for user_id in paid_users]
+        template_name = "apologyEmail"
+
+        def status(email):
+            print("Task Done", email)
+
+        for email in email_list:
+            await send_email_background(
+                subject="PLEASE IGNORE THE PREVIOUS EMAIL",
+                email_to=email,
+                template_name=template_name,
+                template_body={"name": ""},
+                background_tasks=background_tasks
+            )
+            logger2.info(f"Email sent to ---> {email} with {template_name}")
+            background_tasks.add_task(status, email)
+
+        return JSONResponse(status_code=200, content={"success": True, "message": "email has been sent in background"})
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"success": False, "message": "Internal Server Error"})
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", port=8000, reload=True)

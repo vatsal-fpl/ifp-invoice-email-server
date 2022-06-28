@@ -314,6 +314,12 @@ async def send_invite_email(request: Request, background_tasks: BackgroundTasks)
         return JSONResponse(status_code=500, content={"success": False, "message": "Internal Server Error"})
 
 
+@app.get('/getPaidUsers')
+async def test(request: Request, background_tasks: BackgroundTasks) -> JSONResponse:
+    paid_users = await get_paid_users("ifp-b2c-prod", "subscription")
+    paid_user_email = [get_user_email(user_id) for user_id in paid_users]
+    return JSONResponse(status_code=200, content={"success": True, "paid_users": paid_user_email})
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", port=8000, reload=True)

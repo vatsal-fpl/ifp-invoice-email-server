@@ -291,7 +291,7 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
         template_name = "subscriptionExpiredPaid"
         await send_email_background(
             background_tasks=background_tasks,
-            subject="Subscription expired",
+            subject="Oops! Your subscription has expired…",
             email_to=user_email,
             template_name=template_name,
             template_body=template_body,
@@ -304,20 +304,24 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
             nextDate = endDate + datetime.timedelta(days=1)
             if n_day == 1:
                 template_name = "oneDayRemainingPaid"
+                subject = "Your ILA for Placements subscription is almost over!"
             if n_day == 5:
                 if user_plan == "basic":
                     template_name = "fiveDaysRemainingBasic"
+                    subject = "Upgrade Your Plan Now!"
                 elif user_plan == "essential":
                     template_name = "fiveDaysRemainingEssential"
+                    subject = " Upgrade Your Plan Now!"
                 else:
                     template_name = "subscriptionExpiredPaid"
+                    subject = "Oops! Your subscription has expired…"
             if n_day == 7:
                 template_name = "sevenDaysRemainingPaid"
                 template_body = {"name": user_name, "daysLeft": str(n_day), "endDate": str(
                     endDate), "nextDate": str(nextDate), "plan": user_plan}
 
             await send_email_background(
-                subject=f"ILA for Placements",
+                subject=subject,
                 email_to=user_email,
                 template_name=template_name,
                 template_body=template_body,

@@ -168,6 +168,7 @@ async def check_subscription_paid(request: Request, background_tasks: Background
     key = request.headers.get('email-server-key')
     if key == os.environ.get('EMAIL_SERVER_KEY'):
         try:
+            print("checking subscription")
             await check_subscription_send_email_paid(background_tasks=background_tasks)
             return JSONResponse(status_code=200, content={"success": True, "message": "subscription has been checked"})
         except Exception as e:

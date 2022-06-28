@@ -19,8 +19,9 @@ from logger import get_logger
 load_dotenv('./.env')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-logger1 = get_logger('typeOne', 'logfile1.log')
-logger2 = get_logger('typeTwo', 'logfile2.log')
+
+logger1 = get_logger('general_logs', 'general_logs.log')
+logger2 = get_logger('email_logs', 'email_logs.log')
 
 if platform.system() == "Windows":
     libreoffice_path = os.environ.get(
@@ -282,6 +283,7 @@ async def check_subscription_free(endDate, n_days, user_email, user_name, backgr
 
 
 async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_name, background_tasks: BackgroundTasks):
+    print("inside the check subscription paid ------------------------------")
     date_now = datetime.datetime.now().date()
     endDate = datetime.datetime.fromtimestamp(
         (datetime.datetime.strptime(endDate, "%Y-%m-%d").timestamp())/1000).date()
@@ -293,23 +295,24 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
         print("Subscription expired")
         # change template for subscription expired
         template_name = "subscriptionExpiredPaid"
-        await send_email_background(
-            background_tasks=background_tasks,
-            subject="Oops! Your subscription has expired…",
-            email_to=user_email,
-            template_name=template_name,
-            template_body=template_body,
-        )
-        logger2.info(f"{template_name}:{user_email}")
+        # await send_email_background(
+        #     background_tasks=background_tasks,
+        #     subject="Oops! Your subscription has expired…",
+        #     email_to=user_email,
+        #     template_name=template_name,
+        #     template_body=template_body,
+        # )
     for n_day in n_days:
         print(f"Checking subscription for {n_day} days")
         timedelta = datetime.timedelta(days=n_day)
         if (endDate-timedelta) == date_now:
             nextDate = endDate + datetime.timedelta(days=1)
             if n_day == 1:
+                print("Subscription will expire in one day")
                 template_name = "oneDayRemainingPaid"
                 subject = "Your ILA for Placements subscription is almost over!"
             if n_day == 5:
+                print("Subscription will expire in one day")
                 if user_plan == "basic":
                     template_name = "fiveDaysRemainingBasic"
                     subject = "Upgrade Your Plan Now!"
@@ -320,18 +323,18 @@ async def check_subscription_paid(endDate, n_days, user_email, user_plan, user_n
                     template_name = "subscriptionExpiredPaid"
                     subject = "Oops! Your subscription has expired…"
             if n_day == 7:
+                print("Subscription will expire in one day")
                 template_name = "sevenDaysRemainingPaid"
                 template_body = {"name": user_name, "daysLeft": str(n_day), "endDate": str(
                     endDate), "nextDate": str(nextDate), "plan": user_plan}
 
-            await send_email_background(
-                subject=subject,
-                email_to=user_email,
-                template_name=template_name,
-                template_body=template_body,
-                background_tasks=background_tasks
-            )
-            logger2.info(f"{template_name}:{user_email}")
+            # await send_email_background(
+            #     subject=subject,
+            #     email_to=user_email,
+            #     template_name=template_name,
+            #     template_body=template_body,
+            #     background_tasks=background_tasks
+            # )
 
     if (endDate - timedelta) > date_now:
         print(f"Subscription is valid for {user_email}")
@@ -465,7 +468,6 @@ async def check_subscription_send_email_free(background_tasks: BackgroundTasks):
 
 async def check_subscription_send_email_paid(background_tasks: BackgroundTasks):
     database = 'ifp-b2c-prod'
-
     subscritpion_collection = get_collection(database, "subscription")
     users_collection = get_collection(database, "users")
     student_collection = get_collection(database, "student")
@@ -482,18 +484,18 @@ async def check_subscription_send_email_paid(background_tasks: BackgroundTasks):
         for subscription in subscriptions:
             if str(subscription.get("userId")) == str(student.get("userId")):
                 subscription["firstName"] = student.get("firstName")
-
     for user in all_users:
         user_email = user.get("email")
+        print(user_email)
         userId = user.get("_id")
         user_plan = user.get("plan")
         user_subscription = [subscription for subscription in subscriptions if subscription.get(
             "userId") == str(userId)]
+        print("---------------- 1")
         if len(user_subscription) > 0:
             user_name = user_subscription[0].get(
                 "firstName") if user_subscription[0].get("firstName") else "User"
             endDate = user_subscription[0].get("endDate")
-            print(endDate)
             await check_subscription_paid(endDate, [1, 5, 7], user_email=user_email, user_plan=user_plan, user_name=user_name, background_tasks=background_tasks)
 
 

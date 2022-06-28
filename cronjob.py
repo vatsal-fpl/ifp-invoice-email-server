@@ -7,7 +7,7 @@ def check_paid_users_subscription_cron():
     }
     url = 'https://emailserver.ilaforplacements.com/check_subscription_paid'
     result = requests.post(url=url, headers=headers)
-    print(result.json())
+    print("/check_paid_users_subscription_cron completed")
 
 
 if __name__ == '__main__':

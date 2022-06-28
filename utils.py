@@ -126,15 +126,19 @@ def delete_file(path):
 # ----------------------------------------------------------------
 
 
-def get_username(user_id):
-    database = 'ifp-b2c-prod'
-    student_collection = get_collection(database, "student")
-    student_data = student_collection.find_one(
-        {"userId": ObjectId(user_id)})
-    first_name = str(student_data.get('firstName'))
-    last_name = str(student_data.get('lastName'))
-    user_name = first_name+" "+last_name
-    return user_name
+async def get_username(user_id):
+    try:
+        database = 'ifp-b2c-prod'
+        student_collection = get_collection(database, "student")
+        student_data = student_collection.find_one(
+            {"userId": ObjectId(user_id)})
+        first_name = str(student_data.get('firstName'))
+        last_name = str(student_data.get('lastName'))
+        user_name = first_name+" "+last_name
+        return user_name
+    except:
+        user_name = "User"
+        return user_name
 # ----------------------------------------------------------------
 
 
@@ -382,11 +386,13 @@ async def create_invoice_document(document_context, background_tasks: Background
 
 # ------------------------------------------------------------------------------------------------------------
 async def create_invoice_document2(document_context, background_tasks: BackgroundTasks):
+    print("Inside the create_invoice_document2")
     invoice_template_path = BASE_DIR+"/invoice_template/invoice.docx"
     doc = DocxTemplate(invoice_template_path)
     doc.render(document_context)
     invoice_path = BASE_DIR+"/invoices/"
     invoice_no = document_context.get("paymentId")
+    print(invoice_no, "---------------invoice no")
     if not os.path.exists(invoice_path):
         os.makedirs(invoice_path)
     docx_path = BASE_DIR + f"/generated_documents/"+str(invoice_no)+".docx"
@@ -402,15 +408,14 @@ async def create_invoice_document2(document_context, background_tasks: Backgroun
         print('Error converting docx to pdf!')
 
     userId = document_context.get("userId")
-    user_name = get_username(userId)
+    user_name = await get_username(userId)
     send_email_flag = document_context.get("send_email_flag")
     pdf_path = f"{BASE_DIR}/invoices/{invoice_no}"+".pdf"
-    print("------pdf path", pdf_path)
 
     if send_email_flag == False:
         background_tasks.add_task(delete_file, docx_path)
     else:
-        print("send_email_flag is true")
+
         await send_mail_with_attachment_background(
             subject="Congratulations! Your payment is successful",
             email_to=document_context.get("billEmail"),

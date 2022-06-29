@@ -78,6 +78,36 @@ async def send_email(request: Request, background_tasks: BackgroundTasks):
         return JSONResponse(status_code=401, content={"message": "Unauthorized"})
 
 
+@app.get("/send_signup_email")
+async def send_signup_email(request: Request, background_tasks: BackgroundTasks):
+    logger1.info("Requested the /send_email endpoint")
+    key = request.headers.get('email-server-key')
+    if key == os.environ.get('EMAIL_SERVER_KEY'):
+        params = request.query_params
+        email_to = params.get("email_to")
+        logger1.info("sending email in background")
+        await send_email_background(
+            background_tasks=background_tasks,
+            body="",
+            email_to=email_to,
+            subject="Welcome to ILA for Placements! Let’s get you started!",
+            template_body={"name": "User"},
+            template_name="signUp",
+        )
+        await send_email_background(
+            background_tasks=background_tasks,
+            body="",
+            email_to=email_to,
+            subject="Congratulations! FREE Subscription Activated!",
+            template_body={"name": "User"},
+            template_name="freeSubscriptionActivated",
+        )
+        return JSONResponse(status_code=200, content={"message": "Email sent"})
+    else:
+        logger1.info("Key is invalid")
+        return JSONResponse(status_code=401, content={"message": "Unauthorized"})
+
+
 @app.post("/send_mail_with_attachment")
 async def send_mail_with_attachment(request: Request, background_tasks: BackgroundTasks, file: UploadFile = File(...)):
     logger1.info("Requested /send_mail_with_attachment endpoint")
@@ -309,6 +339,12 @@ async def send_invite_email(request: Request, background_tasks: BackgroundTasks)
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": "Internal Server Error"})
 
+
+@app.get('/test2')
+async def test2(request: Request):
+    params = request.query_params
+    print(params.get("Test2"))
+    return JSONResponse(status_code=200, content={"message": "OK"})
 
 if __name__ == "__main__":
     import uvicorn

@@ -82,3 +82,42 @@
 2022-06-28 17:52:55,836 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx
 2022-06-28 17:52:55,836 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx
 2022-06-28 17:52:55,836 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx
+2022-06-29 12:33:39,547 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:33:39,547 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:33:39,547 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:33:39,548 : INFO : general_logs : sending email in background
+2022-06-29 12:33:39,548 : INFO : general_logs : sending email in background
+2022-06-29 12:33:39,548 : INFO : general_logs : sending email in background
+2022-06-29 12:33:57,797 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:33:57,797 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:33:57,797 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:33:57,798 : INFO : general_logs : sending email in background
+2022-06-29 12:33:57,798 : INFO : general_logs : sending email in background
+2022-06-29 12:33:57,798 : INFO : general_logs : sending email in background
+2022-06-29 12:35:36,018 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:35:36,018 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:35:36,018 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:35:36,019 : INFO : general_logs : sending email in background
+2022-06-29 12:35:36,019 : INFO : general_logs : sending email in background
+2022-06-29 12:35:36,019 : INFO : general_logs : sending email in background
+2022-06-29 12:37:38,558 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:37:38,558 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:37:38,558 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:37:38,559 : INFO : general_logs : sending email in background
+2022-06-29 12:37:38,559 : INFO : general_logs : sending email in background
+2022-06-29 12:37:38,559 : INFO : general_logs : sending email in background
+2022-06-29 12:38:29,062 : INFO : general_logs : Request from: 122.170.25.128
+2022-06-29 12:38:29,062 : INFO : general_logs : Request from: 122.170.25.128
+2022-06-29 12:38:29,062 : INFO : general_logs : Request from: 122.170.25.128
+2022-06-29 12:40:08,680 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:40:08,680 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:40:08,680 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:40:08,681 : INFO : general_logs : sending email in background
+2022-06-29 12:40:08,681 : INFO : general_logs : sending email in background
+2022-06-29 12:40:08,681 : INFO : general_logs : sending email in background
+2022-06-29 12:45:59,906 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:45:59,906 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:45:59,906 : INFO : general_logs : Requested the /send_email endpoint
+2022-06-29 12:45:59,907 : INFO : general_logs : sending email in background
+2022-06-29 12:45:59,907 : INFO : general_logs : sending email in background
+2022-06-29 12:45:59,907 : INFO : general_logs : sending email in background

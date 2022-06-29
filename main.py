@@ -289,16 +289,12 @@ async def send_invite_email(request: Request, background_tasks: BackgroundTasks)
     try:
         data = await request.json()
         email_list = data.get("email_list")
-        paid_users = await get_paid_users("ifp-b2c-prod", "subscription")
-        # change email_list to paid_user_email_list
-        paid_user_email_list = [get_user_email(
-            user_id) for user_id in paid_users]
-        template_name = "apologyEmail"
+        template_name = data.get("template_name")
 
         def status(email):
             print("Task Done", email)
 
-        for email in paid_user_email_list:
+        for email in email_list:
             await send_email_background(
                 subject="PLEASE IGNORE THE PREVIOUS EMAIL",
                 email_to=email,

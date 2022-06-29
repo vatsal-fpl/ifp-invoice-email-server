@@ -83,7 +83,7 @@ async def send_email_background(background_tasks: BackgroundTasks, subject, emai
 
     background_tasks.add_task(fm.send_message, message,
                               template_name=template_name)
-    print("Sent mail")
+    logger2.info(f"Sent email to {email_to}")
 
 # ----------------------------------------------------------------
 

@@ -399,15 +399,15 @@ async def create_invoice_document2(document_context, background_tasks: Backgroun
         os.makedirs(invoice_path)
     docx_path = BASE_DIR + f"/generated_documents/"+str(invoice_no)+".docx"
     doc.save(docx_path)
-    # subprocess.check_output([libreoffice_path, '--headless', '--invisible', '--convert-to',
-    #                         'pdf', f"generated_documents/{invoice_no}.docx", '--outdir', f"{BASE_DIR}/invoices/"])
-    try:
-        subprocess.run(
-            ["doc2pdf", docx_path])
-        subprocess.run(
-            ["mv", f"generated_documents/"+f"{invoice_no}"+'.pdf', f"{BASE_DIR}/invoices/"])
-    except:
-        print('Error converting docx to pdf!')
+    subprocess.check_output([libreoffice_path, '--headless', '--invisible', '--convert-to',
+                            'pdf', f"generated_documents/{invoice_no}.docx", '--outdir', f"{BASE_DIR}/invoices/"])
+    # try:
+    #     subprocess.run(
+    #         ["doc2pdf", docx_path])
+    #     subprocess.run(
+    #         ["mv", f"generated_documents/"+f"{invoice_no}"+'.pdf', f"{BASE_DIR}/invoices/"])
+    # except:
+    #     print('Error converting docx to pdf!')
 
     userId = document_context.get("userId")
     user_name = await get_username(userId)

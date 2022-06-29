@@ -70,3 +70,15 @@
 2022-06-28 15:05:27,786 : INFO : general_logs : Requested /check_subscription_paid endpoint
 2022-06-28 15:05:27,786 : INFO : general_logs : Requested /check_subscription_paid endpoint
 2022-06-28 15:05:27,786 : INFO : general_logs : Requested /check_subscription_paid endpoint
+2022-06-28 17:52:04,087 : INFO : general_logs : Requested /create_send_invoice_with_docx endpoint
+2022-06-28 17:52:04,087 : INFO : general_logs : Requested /create_send_invoice_with_docx endpoint
+2022-06-28 17:52:04,087 : INFO : general_logs : Requested /create_send_invoice_with_docx endpoint
+2022-06-28 17:52:09,455 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx
+2022-06-28 17:52:09,455 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx
+2022-06-28 17:52:09,455 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx
+2022-06-28 17:52:39,739 : INFO : general_logs : Requested /create_send_invoice_with_docx endpoint
+2022-06-28 17:52:39,739 : INFO : general_logs : Requested /create_send_invoice_with_docx endpoint
+2022-06-28 17:52:39,739 : INFO : general_logs : Requested /create_send_invoice_with_docx endpoint
+2022-06-28 17:52:55,836 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx
+2022-06-28 17:52:55,836 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx
+2022-06-28 17:52:55,836 : INFO : general_logs : file deleted from path C:\Users\vatsal\Desktop\FastApiMailNew/generated_documents/pay_JUE86Xh0EEdOYB.docx

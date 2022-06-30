@@ -94,14 +94,6 @@ async def send_signup_email(request: Request, background_tasks: BackgroundTasks)
             template_body={"name": "User"},
             template_name="signUp",
         )
-        await send_email_background(
-            background_tasks=background_tasks,
-            body="",
-            email_to=email_to,
-            subject="Congratulations! FREE Subscription Activated!",
-            template_body={"name": "User"},
-            template_name="freeSubscriptionActivated",
-        )
         return JSONResponse(status_code=200, content={"message": "Email sent"})
     else:
         logger1.info("Key is invalid")
@@ -319,23 +311,25 @@ async def send_invite_email(request: Request, background_tasks: BackgroundTasks)
     try:
         data = await request.json()
         email_list = data.get("email_list")
-        template_name = data.get("template_name")
+        template_name = "IBSmail"
 
         def status(email):
             print("Task Done", email)
-
+        count = 0
         for email in email_list:
+            email = email.lower()
+            print(email)
+            count += 1
             await send_email_background(
-                subject="PLEASE IGNORE THE PREVIOUS EMAIL",
+                subject=" Welcome to ILA for Placements!",
                 email_to=email,
                 template_name=template_name,
                 template_body={"name": ""},
                 background_tasks=background_tasks
             )
-            logger2.info(f"Email sent to ---> {email} with {template_name}")
             background_tasks.add_task(status, email)
 
-        return JSONResponse(status_code=200, content={"success": True, "message": "email has been sent in background"})
+        return JSONResponse(status_code=200, content={"success": True, "message": "email has been sent in background", "count": f"{count}"})
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": "Internal Server Error"})
 
